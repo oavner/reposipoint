@@ -1,0 +1,8 @@
+name: reposipoint-backend
+port: 80
+# imagePullSecret: 
+image: 
+  name: nginx
+  tag: latest
+config:
+  endpoint: create
