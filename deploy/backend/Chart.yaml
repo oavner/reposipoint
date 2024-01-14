@@ -1,0 +1,5 @@
+apiVersion: v2
+name: reposipoint-backend
+description: Package Of The Reposipoint Backend.
+version: 0.0.1
+
