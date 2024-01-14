@@ -3,5 +3,6 @@ kind: ConfigMap
 metadata:
   name: "{{ .Values.name }}-configmap"
 data: 
-  ENDPOINT: "{{ .Values.config.endpoint }}"
+  GITHUB_PERSONAL_ACCESSTOKEN: "{{ .Values.config.githubPersonalAccessToken }}"
+  GITHUB_API_URL: "{{ .Values.config.githubApiUrl }}"
 
