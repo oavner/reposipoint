@@ -35,5 +35,5 @@ jobs:
         run: |
           currentDateTime=$(date +"%Y-%m-%d-%H-%M-%S")
           docker build -t ghcr.io/oavner/reposipoint-backend:$currentDateTime .
-          docker push trigoorg/reposipoint-backend:$currentDateTime
+          docker push ghcr.io/oavner/reposipoint-backend:$currentDateTime
         working-directory: app
