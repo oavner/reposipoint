@@ -12,13 +12,22 @@ spec:
       labels:
         app: {{ .Values.name }}
     spec:
-#      imagePullSecrets:
-#        - name: {{ .Values.imagePullSecret}}
       containers:
         - name: {{ .Values.name }}
           image: '{{ .Values.image.name }}:{{ .Values.image.tag }}'
-#          ports:
-#            - containerPort: {{ .Values.port}}
-#          envFrom:
-#            - configMapRef:
-#                name: "{{ .Values.name }}-configmap"
+          volumeMounts:
+          - name: lint-workflow
+            mountPath: {{ .Values.config.localWorkflowPath }}
+          envFrom:
+            - configMapRef:
+                name: "{{ .Values.name }}-configmap"
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: {{ .Values.config.port }}
+            initialDelaySeconds: 3
+            periodSeconds: 5
+      volumes:
+      - name: lint-workflow
+        configMap:
+          name: lint-workflow

@@ -1,8 +1,10 @@
 ### How To Bootsrap Reposipoint Over MacOS
 
+this bootstrap script does not handle docker installation at your local environment, please make sure your docker daemon is up and running before using the bootstrap script.
+
 1. clone this repository: `git clone https://github.com/oavner/reposipoint.git`
 2. set execution permissions to the current user over the bootstrap script: `chmod u+x reposipoint/bootstrap/mac.sh`
-3. run the bootstrap script like so: `./reposipoint/bootstrap/mac.sh` (please verify that u cloned the repository successfully and if u already cloned it before please both pull the latest version from `master` branch and `cd` to the father dir of this repo since the bootstrap script uses relative pathes)
+3. run the bootstrap script like so: `./reposipoint/bootstrap/mac.sh <github personal access token>` (please verify that u cloned the repository successfully and if u already cloned it before please both pull the latest version from `master` branch and `cd` to the father dir of this repo since the bootstrap script uses relative pathes)
 
 the script will:
 1. use `brew` to install / update the following packages: `k3d, kubectl, helm`

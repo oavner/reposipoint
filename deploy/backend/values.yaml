@@ -1,8 +1,15 @@
 name: reposipoint-backend
-port: 80
-# imagePullSecret: 
 image: 
-  name: nginx
-  tag: latest
+  name: ghcr.io/oavner/reposipoint-backend
+  tag: 2024-01-15-11-32-18
 config:
-  endpoint: create
+  workflowFileName: lint.yaml
+  localWorkflowPath: /workflows
+  remoteWorkflowPath: .github/workflows
+  githubPersonalAccessToken: 
+  githubApiUrl: https://api.github.com
+  githubOwner: oavner
+  host: 0.0.0.0
+  port: 80
+
+

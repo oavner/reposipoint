@@ -39,7 +39,7 @@ def index():
         logger.error(f"Failed to create repository: {response.text}")
         return jsonify({'error:' 'Fail to create repository': response.text}), response.status_code
     
-    response = repository.push_local_file('hello.txt', 'hello.txt')
+    response = repository.push_local_file(config.local_workflow_path, config.remote_workflow_path)
     if response.status_code == 201:
         logger.info("Successfully added file to repository")
     else:
@@ -55,9 +55,6 @@ def index():
     
     return jsonify({'success': 'Successfully created repository'}), 201
 
-
-    
-
 @app.route("/healthz")
 def healthz():
     """
@@ -69,4 +66,4 @@ def healthz():
 if __name__ == "__main__":
     config = AppConfig()
     logger.setLevel(logging.DEBUG)
-    serve(app, host="0.0.0.0", port=config.port)
+    serve(app, host=config.host, port=config.port)
