@@ -9,7 +9,7 @@ data:
       push:
         branches: [main]
         paths:
-          - **
+          - /
 
     permissions:
       contents: read

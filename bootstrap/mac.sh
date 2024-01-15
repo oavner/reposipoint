@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
-if [ $# -ge 1 ]; then
+if [ $# -eq 2 ]; then
     echo "Using $1 GitHub Personal Access Token to create repositories"
+    echo "Using $2 GitHub owner to create repositories"
 
     brew install k3d kubectl helm # docker
 
@@ -17,10 +18,16 @@ if [ $# -ge 1 ]; then
 
     kubectl get nodes
 
-    helm upgrade --install reposipoint ./reposipoint/deploy/backend --set config.githubPersonalAccessToken=$1 # it will only install since the cluster gets recreated
+    helm upgrade --install reposipoint ./reposipoint/deploy/backend --set config.githubPersonalAccessToken=$1 --set config.owner=$2  # it will only install since the cluster gets recreated
+
+    kubectl wait --for=condition=available deployment/reposipoint-backend-deployment --timeout=60s
+
+    echo "reposipoint is up and running, you can access it at http://localhost:8081"
+
+    echo "use curl to create a new repository 'curl -X POST -H \"Content-Type: application/json\" -d '{\"repo_name\": \"example\", \"description\": \"Example repository\"}' http://localhost:8081/create'"
 
 else
-    echo "Usage: $0 <GitHub Personal Access Token>"
+    echo "Usage: $0 <GitHub Personal Access Token> <GithHub owner>"
     exit 1
 fi 
 
