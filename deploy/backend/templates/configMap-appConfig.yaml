@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: "{{ .Values.name }}-configmap"
+data: 
+  GITHUB_PERSONAL_ACCESSTOKEN: "{{ .Values.config.githubPersonalAccessToken }}"
+  GITHUB_API_URL: "{{ .Values.config.githubApiUrl }}"
+  GITHUB_OWNER: "{{ .Values.config.githubOwner }}"
+  HOST: "{{ .Values.config.host }}"
+  PORT: "{{ .Values.config.port }}"
+  LOCAL_WORKFLOW_PATH: "{{ .Values.config.localWorkflowPath }}/{{ .Values.config.workflowFileName }}"
+  REMOTE_WORKFLOW_PATH: "{{ .Values.config.remoteWorkflowPath }}/{{ .Values.config.workflowFileName }}"
+

@@ -1,0 +1,38 @@
+name: build-reposipoint-backend
+on:
+  push:
+    paths:
+     - app/**
+     - .github/workflows/ci.yml
+jobs:
+  build-reposipoint-backend:
+    name: Build reposipoint-backend
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Git repository
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: app
+
+      - name: Set up Docker
+        uses: docker-practice/actions-setup-docker@master
+        with:
+          timeout-minutes: 12
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ github.actor }}
+          password: ${{ secrets.PUSH_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Build reposipoint-backend
+        run: |
+          currentDateTime=$(date +"%Y-%m-%d-%H-%M-%S")
+          docker build -t ghcr.io/oavner/reposipoint-backend:$currentDateTime .
+          docker push trigoorg/reposipoint-backend:$currentDateTime
+        working-directory: app

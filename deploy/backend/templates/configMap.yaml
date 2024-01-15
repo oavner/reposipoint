@@ -1,8 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: "{{ .Values.name }}-configmap"
-data: 
-  GITHUB_PERSONAL_ACCESSTOKEN: "{{ .Values.config.githubPersonalAccessToken }}"
-  GITHUB_API_URL: "{{ .Values.config.githubApiUrl }}"
-

@@ -5,4 +5,13 @@ image:
   name: nginx
   tag: latest
 config:
-  endpoint: create
+  workflowFileName: lint.yaml
+  localWorkflowPath: /workflows
+  remoteWorkflowPath: .github/workflows
+  githubPersonalAccessToken: 
+  githubApiUrl: https://api.github.com
+  githubOwner: oavner
+  host: 0.0.0.0
+  port: 80
+
+

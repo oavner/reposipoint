@@ -15,4 +15,4 @@ spec:
           service:
             name: "{{ .Values.name }}-service"
             port:
-              number: 80
+              number: {{ .Values.config.port }}
