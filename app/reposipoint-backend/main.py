@@ -39,7 +39,7 @@ def index():
         logger.error(f"Failed to create repository: {response.text}")
         return jsonify({'error:' 'Fail to create repository': response.text}), response.status_code
     
-    response = repository.push_local_file('hello.txt', '.github/workflows/lint.yaml')
+    response = repository.push_local_file(config.local_workflow_path, config.remote_workflow_path)
     if response.status_code == 201:
         logger.info("Successfully added file to repository")
     else:
