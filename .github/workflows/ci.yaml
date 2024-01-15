@@ -3,7 +3,7 @@ on:
   push:
     paths:
      - app/**
-     - .github/workflows/ci.yml
+     - .github/workflows/ci.yaml
 jobs:
   build-reposipoint-backend:
     name: Build reposipoint-backend
