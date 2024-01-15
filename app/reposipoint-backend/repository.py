@@ -57,12 +57,7 @@ class Repository:
         Adds branch protection to the main branch.
         """
         branch_protection_data = {
-            "required_status_checks": {
-                "strict": True,
-                "contexts": [
-                    "continuous-integration"
-                ]
-            },
+            "required_status_checks": None,
             "enforce_admins": True,
             "required_pull_request_reviews": {
                 "dismiss_stale_reviews": True,
