@@ -26,19 +26,36 @@ def index():
     
     repository = Repository(
         config.api_url,
+        config.owner,
         config.personal_access_token,
         repo_name,
         description
     )
   
     response = repository.create()
-
     if response.status_code == 201:
         logger.info("Successfully created repository")
-        return jsonify({'success': 'Successfully created repository'}), 201
     else:
         logger.error(f"Failed to create repository: {response.text}")
-        return jsonify({'error': response.text}), response.status_code
+        return jsonify({'error:' 'Fail to create repository': response.text}), response.status_code
+    
+    response = repository.push_local_file('hello.txt', 'hello.txt')
+    if response.status_code == 201:
+        logger.info("Successfully added file to repository")
+    else:
+        logger.error(f"Failed to add file to repository: {response.text}")
+        return jsonify({'error:' 'Failed to add file to repository': response.text}), response.status_code
+    
+    response = repository.add_branch_protection()
+    if response.status_code == 200:
+        logger.info("Successfully added branch protection")
+    else:   
+        logger.error(f"Failed to add branch protection: {response.text}")
+        return jsonify({'error:' 'Failed to add branch protection': response.text}), response.status_code
+    
+    return jsonify({'success': 'Successfully created repository'}), 201
+
+
     
 
 @app.route("/healthz")
